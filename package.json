@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "validate": "node scripts/validate-recipes.js",
     "build:recipes": "node scripts/build-recipes.js",
-    "build": "npm run build:recipes && wrangler deploy --dry-run",
-    "deploy": "npm run build:recipes && wrangler deploy",
-    "dev": "npm run build:recipes && wrangler dev",
+    "build:images": "node scripts/build-images.js",
+    "build:all": "npm run validate && npm run build:images && npm run build:recipes",
+    "build": "npm run build:all && wrangler deploy --dry-run",
+    "deploy": "npm run build:all && wrangler deploy",
+    "dev": "npm run build:all && wrangler dev",
     "dev:watch": "concurrently \"npm run build:recipes -- --watch\" \"wrangler dev\""
   },
   "dependencies": {
@@ -14,9 +17,12 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20241022.0",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
     "concurrently": "^8.2.2",
+    "sharp": "^0.33.5",
     "typescript": "^5.3.3",
-    "wrangler": "^4.45.0",
+    "wrangler": "^3.80.0",
     "yaml": "^2.3.4"
   }
 }

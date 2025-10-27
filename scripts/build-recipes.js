@@ -3,7 +3,7 @@ import { parse } from 'yaml'
 import { join } from 'path'
 
 const recipesDir = 'recipes'
-const outputFile = 'recipes.json'  // Changed from src/recipes.json
+const outputFile = 'recipes.json'
 
 function buildRecipes() {
     const recipes = {}

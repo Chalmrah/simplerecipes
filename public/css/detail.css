@@ -1,0 +1,68 @@
+body {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.theme-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 100;
+}
+
+.recipe-header-image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+}
+
+h1 {
+    margin-bottom: 1rem;
+}
+
+/* Override h2 styles for detail page */
+h2 {
+    padding-bottom: 0.25rem;
+    margin-top: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Recipe Sections */
+section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+section h2 {
+    margin-top: 0;
+}
+
+ul, ol {
+    margin-left: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+li strong {
+    color: var(--accent-color);
+}
+
+/* Back Link */
+.back-link {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.5rem 1rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}

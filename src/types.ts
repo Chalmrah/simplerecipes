@@ -4,6 +4,7 @@ export interface Recipe {
     serving_size: number
     spice_index: 'none' | 'mild' | 'medium' | 'hot' | 'extra hot'
     tags: string[]
+    image?: string  // New field
     components: Component[]
     plating?: string[]
 }

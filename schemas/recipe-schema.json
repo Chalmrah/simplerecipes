@@ -1,0 +1,110 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Recipe Schema",
+  "description": "Schema for structured recipe data",
+  "type": "object",
+  "required": [
+    "title",
+    "components",
+    "total_time",
+    "serving_size",
+    "spice_index"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The name of the recipe",
+      "minLength": 1
+    },
+    "total_time": {
+      "type": "string",
+      "description": "Total time to prepare and cook the recipe",
+      "pattern": "^[0-9]+ (minute|minutes|hour|hours|min|hr|hrs).*$",
+      "examples": ["30 minutes", "1 hour 15 minutes", "2 hours"]
+    },
+    "serving_size": {
+      "type": "integer",
+      "description": "Number of servings this recipe makes",
+      "minimum": 1
+    },
+    "spice_index": {
+      "type": "string",
+      "description": "Heat level of the dish",
+      "enum": ["none", "mild", "medium", "hot", "extra hot"]
+    },
+    "image": {
+      "type": "string",
+      "description": "Path to image folder (without extension)",
+      "pattern": "^img/[a-z0-9-]+$",
+      "examples": ["img/chicken-tikka-masala", "img/pad-thai"]
+    },
+    "tags": {
+      "type": "array",
+      "description": "Tags to categorize the recipe",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "components": {
+      "type": "array",
+      "description": "Different components or parts of the recipe",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "ingredients", "method"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the recipe component",
+            "minLength": 1
+          },
+          "ingredients": {
+            "type": "array",
+            "description": "List of ingredients for this component",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["item", "quantity"],
+              "properties": {
+                "item": {
+                  "type": "string",
+                  "description": "Name of the ingredient",
+                  "minLength": 1
+                },
+                "quantity": {
+                  "type": "string",
+                  "description": "Amount of the ingredient",
+                  "minLength": 1
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "method": {
+            "type": "array",
+            "description": "Cooking instructions",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "description": "A single step in the method",
+              "minLength": 1
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "plating": {
+      "type": "array",
+      "description": "Instructions for plating and serving",
+      "items": {
+        "type": "string",
+        "description": "A plating instruction step",
+        "minLength": 1
+      }
+    }
+  },
+  "additionalProperties": false
+}
