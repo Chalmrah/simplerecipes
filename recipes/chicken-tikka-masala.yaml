@@ -1,0 +1,77 @@
+title: Chicken Tikka Masala
+total_time: 60 minutes
+serving_size: 2
+spice_index: medium
+image: img/chicken-tikka-masala
+tags:
+  - Indian
+  - curry
+  - chicken
+  - main course
+
+components:
+  - name: Chicken Tikka
+    ingredients:
+      - item: skinless chicken breast
+        quantity: 500g
+      - item: coriander powder
+        quantity: 1 tsp
+      - item: cumin powder
+        quantity: 1/2 tsp
+      - item: garam masala
+        quantity: 1/2 tsp
+      - item: chili powder
+        quantity: 1 tsp
+      - item: turmeric powder
+        quantity: 1/4 tsp
+      - item: natural yoghurt
+        quantity: 2 tbsp
+      - item: neutral oil
+        quantity: 1 tbsp
+    
+    method:
+      - Cut chicken into bite size pieces and put into mixing bowl
+      - Add all powders to mixing bowl
+      - Add the yoghurt and oil
+      - Mix well and leave in the mixing bowl for at least 30 minutes to marinade
+      - Put into air fryer @ 200C for 12-15 minutes
+
+  - name: Masala
+    ingredients:
+      - item: neutral oil
+        quantity: 1 tsp
+      - item: brown onion (sliced)
+        quantity: 1 medium size
+      - item: tomatoes (blended) or tomato passata
+        quantity: 4 tomatoes or 500ml
+      - item: garlic powder
+        quantity: 1/2 tbsp
+      - item: ginger paste
+        quantity: 1 tbsp
+      - item: coriander powder
+        quantity: 1 tsp
+      - item: chili powder
+        quantity: 1 tsp
+      - item: salt
+        quantity: to taste
+      - item: paprika
+        quantity: 1 tsp
+      - item: double cream
+        quantity: 2-3 tbsp
+      - item: honey
+        quantity: 1 tbsp
+    
+    method:
+      - Fry the onions in the oil on medium until brown
+      - Add ginger and garlic
+      - Add spices and a splash of water to prevent the spices from burning
+      - Blend the tomatoes to make a puree, and add to the pan, or just add the passata
+      - Wait until you can hear the oil sizzling before adding some more water
+      - Add cooked chicken to the pot
+      - Add paprika, cream and honey to the pot and stir well
+      - Simmer on low heat for 5 minutes
+
+plating:
+  - Heat up some pilau rice and add to the plate
+  - Add chicken and sauce to plate
+  - Enjoy

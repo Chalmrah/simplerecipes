@@ -1,0 +1,22 @@
+{
+  "name": "recipe-site",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build:recipes": "node scripts/build-recipes.js",
+    "build": "npm run build:recipes && wrangler deploy --dry-run",
+    "deploy": "npm run build:recipes && wrangler deploy",
+    "dev": "npm run build:recipes && wrangler dev",
+    "dev:watch": "concurrently \"npm run build:recipes -- --watch\" \"wrangler dev\""
+  },
+  "dependencies": {
+    "hono": "^4.0.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241022.0",
+    "concurrently": "^8.2.2",
+    "typescript": "^5.3.3",
+    "wrangler": "^4.45.0",
+    "yaml": "^2.3.4"
+  }
+}
