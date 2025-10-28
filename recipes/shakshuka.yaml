@@ -1,0 +1,52 @@
+title: Shakshuka
+total_time: 30 minutes
+serving_size: 2
+spice_index: mild
+image: img/shakshuka
+tags:
+  - African
+  - middle eastern
+  - eggs
+  - main
+  - tomato
+
+components:
+  - name: Shakshuka
+    ingredients:
+      - item: shopped tomatoes
+        quantity: 400g
+      - item: tomato puree
+        quantity: 1 tbsp
+      - item: eggs
+        quantity: "4"
+      - item: red bell pepper
+        quantity: "1"
+      - item: chili powder
+        quantity: 1 tsp
+      - item: medium white onion
+        quantity: "1"
+      - item: Splash of water
+        quantity: "1"
+      - item: minced garlic
+        quantity: 1 tsp
+      - item: sugar
+        quantity: 1 tsp
+      - item: olive oil
+        quantity: 1 tbsp
+      - item: smoked paprika
+        quantity: 1 tsp
+      - item: chopped parsley
+        quantity: 10g
+      - item: low fat feta
+        quantity: 80g
+      - item: cumin powder
+        quantity: 1 tsp
+      - item: sourdough bread
+        quantity: 4 slices
+
+    method:
+      - Put the oil in a large pan and heat up
+      - Fill in the rest of the recipe
+
+plating:
+  - Enjoy

@@ -1,13 +1,13 @@
 title: Chicken Tikka Masala
-total_time: 60 minutes
+total_time: 40 minutes
 serving_size: 2
-spice_index: medium
+spice_index: mild
 image: img/chicken-tikka-masala
 tags:
   - Indian
   - curry
   - chicken
-  - main course
+  - main
 
 components:
   - name: Chicken Tikka
