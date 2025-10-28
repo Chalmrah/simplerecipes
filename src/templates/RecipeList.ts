@@ -116,7 +116,7 @@ export function RecipeList(recipes: [string, Recipe][]) {
                     const tags = card.dataset.tags;
                     const matches = title.includes(searchTerm) || tags.includes(searchTerm);
 
-                    card.classList.toggle('hidden', !matches);
+                    card.parentElement.classList.toggle('hidden', !matches);
                     if (matches) visibleCount++;
                 });
 
