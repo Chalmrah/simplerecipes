@@ -15,8 +15,6 @@ addFormats(ajv)
 const schema = JSON.parse(readFileSync(schemaPath, 'utf8'))
 const validate = ajv.compile(schema)
 
-console.log('🔍 Validating recipes against schema...\n')
-
 let hasErrors = false
 let validCount = 0
 let errorCount = 0
@@ -25,7 +23,7 @@ let errorCount = 0
 const files = readdirSync(recipesDir).filter(f => f.endsWith('.yaml'))
 
 if (files.length === 0) {
-    console.error('❌ No recipe files found in recipes/ directory')
+    console.error('ERROR: No recipe files found in recipes/ directory')
     process.exit(1)
 }
 
@@ -42,10 +40,9 @@ for (const file of files) {
         const valid = validate(recipe)
 
         if (valid) {
-            console.log(`✅ ${file}`)
             validCount++
         } else {
-            console.log(`❌ ${file}`)
+            console.log(`INVALID: ${file}`)
             hasErrors = true
             errorCount++
 
@@ -53,10 +50,10 @@ for (const file of files) {
             if (validate.errors) {
                 validate.errors.forEach(error => {
                     const path = error.instancePath || 'root'
-                    console.log(`   └─ ${path}: ${error.message}`)
+                    console.log(`  ${path}: ${error.message}`)
                     if (error.params) {
                         Object.entries(error.params).forEach(([key, value]) => {
-                            console.log(`      ${key}: ${JSON.stringify(value)}`)
+                            console.log(`    ${key}: ${JSON.stringify(value)}`)
                         })
                     }
                 })
@@ -64,25 +61,17 @@ for (const file of files) {
             console.log()
         }
     } catch (error) {
-        console.log(`❌ ${file}`)
-        console.log(`   └─ Parse error: ${error.message}\n`)
+        console.log(`ERROR: ${file}`)
+        console.log(`  Parse error: ${error.message}\n`)
         hasErrors = true
         errorCount++
     }
 }
 
-// Summary
-console.log('\n' + '─'.repeat(50))
-console.log(`📊 Validation Summary:`)
-console.log(`   Total files: ${files.length}`)
-console.log(`   Valid: ${validCount}`)
-console.log(`   Errors: ${errorCount}`)
-console.log('─'.repeat(50) + '\n')
-
 if (hasErrors) {
-    console.error('❌ Validation failed! Please fix the errors above.\n')
+    console.error(`Validation failed: ${errorCount} error(s), ${validCount} valid`)
     process.exit(1)
 } else {
-    console.log('✅ All recipes are valid!\n')
+    console.log(`Validated ${validCount} recipe(s)`)
     process.exit(0)
 }

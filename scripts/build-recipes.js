@@ -16,14 +16,14 @@ function buildRecipes() {
                 const id = file.replace('.yaml', '')
                 recipes[id] = recipe
             } catch (error) {
-                console.error(`❌ Error parsing ${file}:`, error.message)
+                console.error(`ERROR: ${file}:`, error.message)
                 process.exit(1)
             }
         }
     })
 
     writeFileSync(outputFile, JSON.stringify(recipes, null, 2))
-    console.log(`✅ Built ${Object.keys(recipes).length} recipes`)
+    console.log(`Built ${Object.keys(recipes).length} recipe(s)`)
 }
 
 // Build immediately
@@ -31,10 +31,10 @@ buildRecipes()
 
 // Watch mode for development
 if (process.argv.includes('--watch')) {
-    console.log('👀 Watching for changes...')
+    console.log('Watching for changes...')
     watch(recipesDir, (eventType, filename) => {
         if (filename && filename.endsWith('.yaml')) {
-            console.log(`🔄 Detected change in ${filename}`)
+            console.log(`Change detected: ${filename}`)
             buildRecipes()
         }
     })

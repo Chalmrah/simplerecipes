@@ -1,52 +1,63 @@
 title: Shakshuka
-total_time: 30 minutes
 serving_size: 2
+total_time: 30 minutes
 spice_index: mild
 image: img/shakshuka
+
 tags:
+  - vegetarian
+  - mediterranean
+  - one-pan
   - African
-  - middle eastern
-  - eggs
   - main
-  - tomato
 
 components:
   - name: Shakshuka
     ingredients:
-      - item: shopped tomatoes
-        quantity: 400g
-      - item: tomato puree
-        quantity: 1 tbsp
+      - item: chopped tomatoes
+        quantity: "400g"
+      - item: tomato paste
+        quantity: "2 tbsp"
       - item: eggs
         quantity: "4"
       - item: red bell pepper
         quantity: "1"
-      - item: chili powder
-        quantity: 1 tsp
       - item: medium white onion
         quantity: "1"
-      - item: Splash of water
-        quantity: "1"
       - item: minced garlic
-        quantity: 1 tsp
-      - item: sugar
-        quantity: 1 tsp
-      - item: olive oil
-        quantity: 1 tbsp
+        quantity: "2 tsp"
+      - item: cumin
+        quantity: "2 tsp"
       - item: smoked paprika
-        quantity: 1 tsp
-      - item: chopped parsley
-        quantity: 10g
-      - item: low fat feta
-        quantity: 80g
-      - item: cumin powder
-        quantity: 1 tsp
-      - item: sourdough bread
-        quantity: 4 slices
+        quantity: "2 tsp"
+      - item: chili powder
+        quantity: "1 tsp"
+      - item: sugar
+        quantity: "1 tsp"
+      - item: olive oil
+        quantity: "2 tbsp"
+      - item: low fat Feta (crumbled)
+        quantity: "80g"
+      - item: fresh parsley (chopped)
+        quantity: "for garnish"
+      - item: Sourdough bread
+        quantity: "170g / 4 slices"
+      - item: water
+        quantity: "splash"
+      - item: salt and pepper
+        quantity: "to taste"
 
     method:
-      - Put the oil in a large pan and heat up
-      - Fill in the rest of the recipe
+      - Heat 2 tbsp olive oil in a large pan over medium heat
+      - Add the chopped onion and bell pepper with salt and pepper to taste, cook until soft
+      - Add the minced garlic and stir until fragrant
+      - Add tomato paste, cumin, smoked paprika, and chili powder, toast for 1 minute
+      - Add the chopped tomatoes, a splash of water, and sugar, stir until the sauce thickens
+      - Make small wells in the sauce and carefully place the 4 eggs inside
+      - Cover the pan with a lid and cook until the eggs are set, approximately 5-7 minutes
+      - Remove from heat and sprinkle the crumbled Feta and chopped parsley over the top
+      - Toast the Sourdough bread until crispy or crusty
 
 plating:
-  - Enjoy
+  - Serve the shakshuka in bowls or plates
+  - Accompany with toasted Sourdough bread slices for dipping and scooping

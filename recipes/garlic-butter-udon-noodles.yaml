@@ -1,0 +1,41 @@
+title: Garlic Butter Udon Noodles
+serving_size: 2
+total_time: 20 minutes
+spice_index: none
+tags:
+  - noodles
+  - asian
+  - quick
+  - garlic
+  - comfort-food
+components:
+  - name: Garlic Butter Udon
+    ingredients:
+      - item: Udon noodles (portioned)
+        quantity: "2 packets"
+      - item: butter
+        quantity: "2-3 tbsp"
+      - item: chopped/cubed garlic
+        quantity: "1 heaped teaspoon"
+      - item: white miso paste
+        quantity: "1 teaspoon"
+      - item: soy sauce
+        quantity: "5 teaspoons"
+      - item: salt and white pepper
+        quantity: "to taste"
+      - item: water (unsalted)
+        quantity: "for boiling"
+    method:
+      - Bring a pot of unsalted water to boil
+      - Cook Udon noodles according to packet instructions (typically 8 minutes)
+      - While noodles cook, place butter in a pan and cook until golden brown
+      - Add chopped garlic to the pan and stir until combined
+      - Once noodles are cooked, drain them well
+      - Place drained noodles into the garlic butter pan and mix gently
+      - Add white miso paste and soy sauce to the noodles
+      - Stir everything together, ensuring the sauce and paste are well combined and noodles are evenly coated
+      - Season with salt and white pepper to taste
+      - Serve hot
+plating:
+  - Transfer garlic butter udon to serving bowls
+  - Serve immediately while hot
