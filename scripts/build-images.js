@@ -1,111 +1,76 @@
-import { readdirSync, existsSync, mkdirSync } from 'fs'
+import { readdirSync, existsSync, mkdirSync, statSync } from 'fs'
 import { join } from 'path'
 import sharp from 'sharp'
+import { imageSourceDir, findImageSource } from './lib/recipes.js'
 
-const sourceDir = 'images/source'
 const outputDir = 'public/img'
 
-async function generatePlaceholder(width, height, outputPath) {
-    // Create a simple gray placeholder with sharp
-    await sharp({
-        create: {
-            width: width,
-            height: height,
-            channels: 4,
-            background: { r: 200, g: 200, b: 200, alpha: 0.8 }
-        }
-    })
-    .webp({ quality: 80 })
-    .toFile(outputPath)
+const variants = [
+    // Detail: 16:9 hero
+    { name: 'detail', width: 1200, height: 675, quality: 82, source: 'detail' },
+    // Thumbnail: 4:3 card image, served at up to ~2x a 300px card
+    { name: 'thumbnail', width: 640, height: 480, quality: 78, source: 'thumbnail' },
+]
+
+function isFresh(sourcePath, outputPath) {
+    return existsSync(outputPath) && statSync(outputPath).mtimeMs >= statSync(sourcePath).mtimeMs
 }
 
 async function buildImages() {
-    // Create output directory if it doesn't exist
-    if (!existsSync(outputDir)) {
-        mkdirSync(outputDir, { recursive: true })
-    }
-
-    // Generate global placeholder.webp for recipes with no image path in YAML
-    try {
-        await generatePlaceholder(1200, 675, join(outputDir, 'placeholder.webp'))
-    } catch (error) {
-        console.error('ERROR: Failed to create placeholder:', error.message)
-    }
-
-    if (!existsSync(sourceDir)) {
+    if (!existsSync(imageSourceDir)) {
         console.log('No source images directory found')
         return
     }
 
-    const folders = readdirSync(sourceDir, { withFileTypes: true })
+    const folders = readdirSync(imageSourceDir, { withFileTypes: true })
         .filter(dirent => dirent.isDirectory())
         .map(dirent => dirent.name)
 
-    let processedCount = 0
-    let placeholderCount = 0
+    let built = 0
+    let skipped = 0
+    let failed = 0
 
     for (const folder of folders) {
-        const sourcePath = join(sourceDir, folder)
-        const outputPath = join(outputDir, folder)
+        const sourceFolder = join(imageSourceDir, folder)
+        const outputFolder = join(outputDir, folder)
+        const detail = findImageSource(sourceFolder, 'detail')
 
-        // Create output folder
-        if (!existsSync(outputPath)) {
-            mkdirSync(outputPath, { recursive: true })
-        }
-
-        // Find source files (support png, jpg, jpeg)
-        const files = readdirSync(sourcePath)
-        const detailSource = files.find(f =>
-            f.startsWith('detail.') && /\.(png|jpg|jpeg)$/i.test(f)
-        )
-        const thumbnailSource = files.find(f =>
-            f.startsWith('thumbnail.') && /\.(png|jpg|jpeg)$/i.test(f)
-        )
-
-        if (!detailSource) {
-            try {
-                // Generate placeholder detail.webp
-                await generatePlaceholder(1200, 675, join(outputPath, 'detail.webp'))
-                
-                // Generate placeholder thumbnail.webp
-                await generatePlaceholder(400, 300, join(outputPath, 'thumbnail.webp'))
-                
-                placeholderCount++
-            } catch (error) {
-                console.error(`ERROR: ${folder}:`, error.message)
-            }
+        if (!detail) {
+            console.warn(`WARN: ${folder}: no detail image, skipping`)
             continue
         }
 
-        try {
-            // Generate detail.webp (1200x675 landscape 16:9, cropped to fit)
-            await sharp(join(sourcePath, detailSource))
-                .resize(1200, 675, {
-                    fit: 'cover',
-                    position: 'center'
-                })
-                .webp({ quality: 85 })
-                .toFile(join(outputPath, 'detail.webp'))
+        mkdirSync(outputFolder, { recursive: true })
 
-            // Generate thumbnail.webp (400x300 landscape 4:3, cropped to fit)
-            const thumbSource = thumbnailSource || detailSource
-            await sharp(join(sourcePath, thumbSource))
-                .resize(400, 300, {
-                    fit: 'cover',
-                    position: 'center'
-                })
-                .webp({ quality: 80 })
-                .toFile(join(outputPath, 'thumbnail.webp'))
+        for (const variant of variants) {
+            // Thumbnail falls back to the detail source when no dedicated crop exists
+            const source = join(sourceFolder, findImageSource(sourceFolder, variant.source) ?? detail)
+            const output = join(outputFolder, `${variant.name}.webp`)
 
-            processedCount++
-        } catch (error) {
-            console.error(`ERROR: ${folder}:`, error.message)
+            if (isFresh(source, output)) {
+                skipped++
+                continue
+            }
+
+            try {
+                await sharp(source)
+                    .rotate() // honour EXIF orientation from phone photos
+                    .resize(variant.width, variant.height, { fit: 'cover', position: 'attention' })
+                    .webp({ quality: variant.quality })
+                    .toFile(output)
+                built++
+            } catch (error) {
+                console.error(`ERROR: ${folder}/${variant.name}:`, error.message)
+                failed++
+            }
         }
     }
 
-    const total = processedCount + placeholderCount
-    const placeholderMsg = placeholderCount > 0 ? ` (${placeholderCount} placeholder)` : ''
-    console.log(`Processed ${total} image(s)${placeholderMsg}`)
+    console.log(`Images: ${built} built, ${skipped} up to date${failed ? `, ${failed} failed` : ''}`)
+    if (failed > 0) process.exit(1)
 }
 
-buildImages().catch(console.error)
+buildImages().catch(error => {
+    console.error(error)
+    process.exit(1)
+})

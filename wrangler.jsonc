@@ -7,8 +7,8 @@
   "compatibility_date": "2025-04-10",
 
   "build": {
-    // Run recipe build script before Wrangler builds
-    "command": "npm run build:recipes"
+    // Regenerate recipes.json and build-info.json before Wrangler bundles the worker
+    "command": "npm run build:recipes && npm run build:info"
   },
 
   "assets": {

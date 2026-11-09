@@ -16,6 +16,6 @@
       "*": ["*"]
     }
   },
-  "include": ["src/**/*", "recipes.json"],
+  "include": ["src/**/*", "recipes.json", "build-info.json"],
   "exclude": ["node_modules", "dist", ".wrangler"]
 }

@@ -1,0 +1,48 @@
+title: Pork Belly and Rice
+total_time: 30 minutes
+serving_size: 2
+spice_index: none
+tags:
+  - asian
+  - rice
+  - main
+
+components:
+  - name: Marinade
+    ingredients:
+      - item: garlic powder
+        quantity: 1 tbsp
+      - item: honey
+        quantity: 1/4 cup
+      - item: brown sugar
+        quantity: 2 tbsp
+      - item: hoisin sauce
+        quantity: 1/4 cup
+      - item: soy sauce
+        quantity: 3 tbsp
+
+    method:
+      - Mix all ingredients in a bowl
+
+  - name: Pork Belly
+    ingredients:
+      - item: pork belly
+        quantity: 200g per person
+      - item: red bell peppers
+        quantity: "2"
+      - item: green onions
+        quantity: "3"
+
+    method:
+      - Cut the pork belly into 2cm wide slices.
+      - Put into the marinade
+      - Slice the peppers into large chunks.
+      - Put both the peppers and pork into a 220C oven for 20 minutes on seperate trays.
+      - Flip the pork over after 10 minutes
+
+plating:
+  - Microwave some rice and put into a bowl.
+  - Put the cooked peppers on top of the rice
+  - Put the pork on top of the peppers
+  - Top with green onion
+  - Enjoy

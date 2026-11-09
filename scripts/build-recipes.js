@@ -1,41 +1,38 @@
-import { readdirSync, readFileSync, writeFileSync, watch } from 'fs'
-import { parse } from 'yaml'
-import { join } from 'path'
+import { writeFileSync, watch } from 'fs'
+import { loadRecipes, report, recipesDir } from './lib/recipes.js'
 
-const recipesDir = 'recipes'
 const outputFile = 'recipes.json'
+const watching = process.argv.includes('--watch')
 
 function buildRecipes() {
-    const recipes = {}
+    const result = loadRecipes()
+    report(result)
 
-    readdirSync(recipesDir).forEach(file => {
-        if (file.endsWith('.yaml')) {
-            try {
-                const content = readFileSync(join(recipesDir, file), 'utf8')
-                const recipe = parse(content)
-                const id = file.replace('.yaml', '')
-                recipes[id] = recipe
-            } catch (error) {
-                console.error(`ERROR: ${file}:`, error.message)
-                process.exit(1)
-            }
+    if (result.errors.length > 0) {
+        // In watch mode keep the last good recipes.json so the dev server stays up
+        if (watching) {
+            console.error('Build skipped, keeping previous recipes.json')
+            return
         }
-    })
+        process.exit(1)
+    }
 
-    writeFileSync(outputFile, JSON.stringify(recipes, null, 2))
-    console.log(`Built ${Object.keys(recipes).length} recipe(s)`)
+    writeFileSync(outputFile, JSON.stringify(result.recipes, null, 2) + '\n')
+    console.log(`Built ${Object.keys(result.recipes).length} recipe(s)`)
 }
 
-// Build immediately
 buildRecipes()
 
-// Watch mode for development
-if (process.argv.includes('--watch')) {
+if (watching) {
     console.log('Watching for changes...')
-    watch(recipesDir, (eventType, filename) => {
-        if (filename && filename.endsWith('.yaml')) {
+    // Editors fire several events per save; collapse them into one rebuild
+    let timer
+    watch(recipesDir, (_eventType, filename) => {
+        if (!filename || !/\.ya?ml$/i.test(filename)) return
+        clearTimeout(timer)
+        timer = setTimeout(() => {
             console.log(`Change detected: ${filename}`)
             buildRecipes()
-        }
+        }, 100)
     })
 }

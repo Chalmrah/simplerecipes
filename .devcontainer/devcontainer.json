@@ -4,6 +4,13 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
+  "mounts": [
+    {
+      "source": "${localEnv:HOME}/.claude",
+      "target": "/home/node/.claude",
+      "type": "bind"
+    }
+  ],
   "remoteUser": "node",
   "customizations" : {
     "jetbrains" : {

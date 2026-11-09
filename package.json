@@ -6,11 +6,13 @@
     "validate": "node scripts/validate-recipes.js",
     "build:recipes": "node scripts/build-recipes.js",
     "build:images": "node scripts/build-images.js",
-    "build:all": "npm run validate && npm run build:images && npm run build:recipes",
+    "build:info": "node scripts/build-info.js",
+    "build:all": "npm run validate && npm run build:images && npm run build:recipes && npm run build:info",
     "build": "npm run build:all && wrangler deploy --dry-run",
     "deploy": "npm run build:all && wrangler deploy",
-    "dev": "npm run build:all && wrangler dev",
-    "dev:watch": "concurrently \"npm run build:recipes -- --watch\" \"wrangler dev\""
+    "dev": "export BUILD_DATE=1815-12-10 && npm run build:all && wrangler dev",
+    "dev:watch": "export BUILD_DATE=1815-12-10 && npm run validate && npm run build:images && npm run build:info && concurrently -k -n recipes,wrangler \"npm run build:recipes -- --watch\" \"wrangler dev\"",
+    "typecheck": "npm run build:info && npm run build:recipes && tsc --noEmit"
   },
   "dependencies": {
     "hono": "^4.10.3"

@@ -33,9 +33,11 @@ npm run dev  # http://localhost:8787
          - Step 2
    ```
 
-2. **Add images to `images/source/recipe-name/`**
-    - `detail.png` (required)
-    - `thumbnail.png` (optional)
+2. **Add images to `images/source/recipe-name/`** (png, jpg or webp)
+    - `detail.jpg` (required; cropped to 16:9 for the recipe page)
+    - `thumbnail.jpg` (optional; cropped to 4:3 for the card, defaults to the detail image)
+
+   Leave out `image:` (or the folder) and the recipe gets a coloured letter tile instead.
 
 3. **Test**
    ```bash
@@ -51,6 +53,8 @@ npm run deploy
 
 ## Commands
 
-- `npm run validate` - Check recipes
-- `npm run dev` - Local server
+- `npm run validate` - Check recipes against the schema and image folders
+- `npm run dev` - Build once, then serve on http://localhost:8787
+- `npm run dev:watch` - Same, but rebuilds when a recipe YAML changes (a broken YAML keeps the last good build)
+- `npm run typecheck` - TypeScript check
 - `npm run deploy` - Deploy to Cloudflare

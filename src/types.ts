@@ -1,10 +1,12 @@
+export type SpiceLevel = 'none' | 'mild' | 'medium' | 'hot' | 'extra hot'
+
 export interface Recipe {
     title: string
     total_time: string
     serving_size: number
-    spice_index: 'none' | 'mild' | 'medium' | 'hot' | 'extra hot'
-    tags: string[]
-    image?: string  // New field
+    spice_index: SpiceLevel
+    tags?: string[]
+    image?: string
     components: Component[]
     plating?: string[]
 }
@@ -21,3 +23,8 @@ export interface Ingredient {
 }
 
 export type RecipeCollection = Record<string, Recipe>
+
+export interface BuildInfo {
+    commit: string
+    builtAt: string
+}
